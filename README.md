@@ -1,4 +1,12 @@
-# Ees
+# Elixir/Erlang Selection
+
+Elixir/Erlang 精选，定期分享一些有趣的 Elixir/Erlang 项目。
+
+使用技术
+
+* Phoenix LiveView
+* NimblePublisher
+* EasyMDE
 
 To start your Phoenix server:
 
