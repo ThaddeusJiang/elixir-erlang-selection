@@ -33,6 +33,9 @@ defmodule EesWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+
+    get "/blogs", BlogController, :index
+    get "/blogs/:id", BlogController, :show
   end
 
   # Other scopes may use custom stacks.

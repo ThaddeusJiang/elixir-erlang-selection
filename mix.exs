@@ -49,7 +49,10 @@ defmodule Ees.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:phx_gen_auth, "~> 0.6", only: [:dev], runtime: false},
-      {:pow, "~> 1.0.21"}
+      {:pow, "~> 1.0.21"},
+      {:nimble_publisher, "~> 0.1.1"},
+      {:makeup_elixir, ">= 0.0.0"},
+      {:makeup_erlang, ">= 0.0.0"}
     ]
   end
 
