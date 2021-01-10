@@ -1,5 +1,11 @@
 <h1>Settings</h1>
 
+<%= if Ees.Accounts.is_admin?(@current_user) do %>
+  <div>
+    <p>You have admin access</p>
+  </div>
+<% end %>
+
 <h3>Change email</h3>
 
 <%= form_for @email_changeset, Routes.user_settings_path(@conn, :update), fn f -> %>

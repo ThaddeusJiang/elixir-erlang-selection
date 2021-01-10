@@ -6,8 +6,10 @@ defmodule Ees.Repo.Migrations.CreateUsersAuthTables do
 
     create table(:users) do
       add :email, :citext, null: false
-      add :hashed_password, :string, null: false
+      add :password_hash, :string, null: false
       add :confirmed_at, :naive_datetime
+      add :role, :string, null: false
+
       timestamps()
     end
 

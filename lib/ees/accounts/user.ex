@@ -6,10 +6,19 @@ defmodule Ees.Accounts.User do
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true
-    field :hashed_password, :string
+    field :password_hash, :string
     field :confirmed_at, :naive_datetime
 
+    field :role, :string, null: false, default: "user"
+
     timestamps()
+  end
+
+  @spec changeset_role(Ecto.Schema.t() | Ecto.Changeset.t(), map()) :: Ecto.Changeset.t()
+  def changeset_role(user_or_changeset, attrs) do
+    user_or_changeset
+    |> Ecto.Changeset.cast(attrs, [:role])
+    |> Ecto.Changeset.validate_inclusion(:role, ~w(user admin))
   end
 
   @doc """
@@ -61,7 +70,7 @@ defmodule Ees.Accounts.User do
 
     if hash_password? && password && changeset.valid? do
       changeset
-      |> put_change(:hashed_password, Bcrypt.hash_pwd_salt(password))
+      |> put_change(:password_hash, Bcrypt.hash_pwd_salt(password))
       |> delete_change(:password)
     else
       changeset
@@ -116,9 +125,9 @@ defmodule Ees.Accounts.User do
   If there is no user or the user doesn't have a password, we call
   `Bcrypt.no_user_verify/0` to avoid timing attacks.
   """
-  def valid_password?(%Ees.Accounts.User{hashed_password: hashed_password}, password)
-      when is_binary(hashed_password) and byte_size(password) > 0 do
-    Bcrypt.verify_pass(password, hashed_password)
+  def valid_password?(%Ees.Accounts.User{password_hash: password_hash}, password)
+      when is_binary(password_hash) and byte_size(password) > 0 do
+    Bcrypt.verify_pass(password, password_hash)
   end
 
   def valid_password?(_, _) do

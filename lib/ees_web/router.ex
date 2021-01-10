@@ -1,5 +1,6 @@
 defmodule EesWeb.Router do
   use EesWeb, :router
+  use Pow.Phoenix.Router
 
   import EesWeb.UserAuth
 
@@ -15,6 +16,17 @@ defmodule EesWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :admin do
+    plug EesWeb.EnsureRolePlug, :admin
+  end
+
+
+  scope "/" do
+    pipe_through :browser
+
+    pow_routes()
   end
 
   scope "/", EesWeb do
@@ -59,8 +71,8 @@ defmodule EesWeb.Router do
     put "/users/reset_password/:token", UserResetPasswordController, :update
   end
 
-  scope "/", EesWeb do
-    pipe_through [:browser, :require_authenticated_user]
+  scope "/admin", EesWeb do
+    pipe_through [:browser, :require_authenticated_user, :admin]
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update

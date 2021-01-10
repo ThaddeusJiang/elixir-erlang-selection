@@ -7,6 +7,27 @@ defmodule Ees.Accounts do
   alias Ees.Repo
   alias Ees.Accounts.{User, UserToken, UserNotifier}
 
+  @type t :: %User{}
+
+  @spec create_admin(map()) :: {:ok, t()} | {:error, Ecto.Changeset.t()}
+  def create_admin(params) do
+    %User{}
+    |> User.registration_changeset(params)
+    |> User.changeset_role(%{role: "admin"})
+    |> Repo.insert()
+  end
+
+  @spec set_admin_role(t()) :: {:ok, t()} | {:error, Ecto.Changeset.t()}
+  def set_admin_role(user) do
+    user
+    |> User.changeset_role(%{role: "admin"})
+    |> Repo.update()
+  end
+
+  @spec is_admin?(t()) :: boolean()
+  def is_admin?(%{role: "admin"}), do: true
+  def is_admin?(_any), do: false
+
   ## Database getters
 
   @doc """
@@ -23,6 +44,10 @@ defmodule Ees.Accounts do
   """
   def get_user_by_email(email) when is_binary(email) do
     Repo.get_by(User, email: email)
+  end
+
+  def get_users do
+    Repo.all(User)
   end
 
   @doc """

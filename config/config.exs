@@ -10,6 +10,10 @@ use Mix.Config
 config :ees,
   ecto_repos: [Ees.Repo]
 
+config :ees, :pow,
+  user: Ees.Accounts.User,
+  repo: Ees.Repo
+
 # Configures the endpoint
 config :ees, EesWeb.Endpoint,
   url: [host: "localhost"],
