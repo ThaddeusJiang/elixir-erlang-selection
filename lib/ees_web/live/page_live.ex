@@ -1,9 +1,11 @@
 defmodule EesWeb.PageLive do
   use EesWeb, :live_view
 
+  alias Ees.Blog
+
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, query: "", results: %{})}
+    {:ok, assign(socket, query: "", results: %{}, posts: Blog.all_posts())}
   end
 
   @impl true

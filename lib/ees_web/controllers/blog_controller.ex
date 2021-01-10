@@ -1,4 +1,4 @@
-defmodule EesWeb.BlogController  do
+defmodule EesWeb.BlogController do
   use EesWeb, :controller
 
   alias Ees.Blog

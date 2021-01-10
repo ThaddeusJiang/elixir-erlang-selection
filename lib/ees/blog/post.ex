@@ -7,6 +7,4 @@ defmodule Ees.Blog.Post do
 
     struct!(__MODULE__, [id: id, body: body] ++ Map.to_list(attrs))
   end
-
-
 end

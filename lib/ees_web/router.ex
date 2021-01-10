@@ -22,7 +22,6 @@ defmodule EesWeb.Router do
     plug EesWeb.EnsureRolePlug, :admin
   end
 
-
   scope "/" do
     pipe_through :browser
 
