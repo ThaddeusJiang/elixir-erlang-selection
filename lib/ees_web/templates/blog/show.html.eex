@@ -1,13 +1,17 @@
-<%= link "← All posts", to: Routes.blog_path(@conn, :index)%>
+<div class="py-4 md:py-12 text-lg md:text-3xl underline-none">
+  <%= link "← All posts", to: Routes.blog_path(@conn, :index)%>
+</div>
 
-<h1><%= @post.title %></h1>
 
-<p>
-  <time><%= @post.date %></time> by <%= @post.author %>
-</p>
 
-<p>
-  Tagged as <%= Enum.join(@post.tags, ", ") %>
-</p>
+<article class="prose prose-sm prose-purple sm:prose lg:prose-lg xl:prose-2xl mx-auto pb-8">
 
-<%= raw @post.body %>
+  <h1 class="w-full text-3xl font-bold pb-4"><%= @post.title %></h1>
+
+  <div class="text-gray-800 text-sm italic">
+    <time><%= @post.date %></time> Created by <%= @post.author %>
+  </div>
+
+  <%= raw @post.body %>
+
+</article>

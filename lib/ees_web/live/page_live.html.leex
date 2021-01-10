@@ -1,21 +1,15 @@
-<section class="phx-hero">
-  <h1>Listing all posts</h1>
+<section >
+  <%= for post <- @posts do %>
+    <div id="<%= post.id %>" class="space-y-6 py-8 border-b">
+      <h2 class="text-lg md:text-2xl font-bold tracking-tight ">
+        <%= link post.title, to: Routes.blog_path(@socket, :show, post)%>
+      </h2>
 
-<%= for post <- @posts do %>
-  <div id="<%= post.id %>" style="margin-bottom: 3rem;">
-    <h2>
-      <%= link post.title, to: Routes.blog_path(@socket, :show, post)%>
-    </h2>
-
-    <p>
-      <time><%= post.date %></time> by <%= post.author %>
-    </p>
-
-    <p>
-      Tagged as <%= Enum.join(post.tags, ", ") %>
-    </p>
-
-    <%= raw post.description %>
-  </div>
-<% end %>
+      <p class="space-x-1 flex flex-wrap">
+        <%= for tag <- post.tags do %>
+          <span class="block px-2 py-1 rounded bg-gray-300"> <%= tag %> </span>
+        <% end %>
+      </p>
+    </div>
+  <% end %>
 </section>

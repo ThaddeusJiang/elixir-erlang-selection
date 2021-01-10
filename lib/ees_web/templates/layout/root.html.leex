@@ -9,23 +9,22 @@
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
-  <body>
-    <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
-          </ul>
-          <%= render "_user_menu.html", assigns %>
-        </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
-        </a>
-      </section>
+  <body class="flex flex-col min-h-screen">
+    <header class="flex-none p-4 md:p-10 border ">
+      <h1 class="text-3xl font-extrabold text-purple-600">
+        <a href="/">Elixir/Erlang 精选</a>
+      </h1>
     </header>
-    <%= @inner_content %>
+
+    <div class="flex-grow px-4 md:px-10">
+      <%= @inner_content %>
+    </div>
+
+    <footer class="flex-none p-4 md:p-10">
+      <div class="flex flex-wrap justify-center text-sm md:text-base md:space-x-2">
+        <div class=" ">Craeted by <a href="//github.com/ThaddeusJiang" class="font-bold">Thaddeus Jiang</a></div>
+        <div>Powered by <a href="https://www.phoenixframework.org/" class="font-semibold">Phoenix</a>
+      </div>
+    </footer>
   </body>
 </html>
