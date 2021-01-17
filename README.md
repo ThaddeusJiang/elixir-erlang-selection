@@ -1,11 +1,12 @@
 # Elixir/Erlang Selection
 
-Elixir/Erlang 精选，定期分享一些有趣的 Elixir/Erlang 项目。
+Elixir/Erlang 精选，定期分享一些有趣的 Elixir/Erlang 内容。
 
 使用技术
 
 * Phoenix LiveView
 * NimblePublisher
+* Tailwind CSS
 * EasyMDE
 
 To start your Phoenix server:
